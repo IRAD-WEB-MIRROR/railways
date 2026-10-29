@@ -1,0 +1,851 @@
+{
+ "valid": "2026-06-01",
+ "updated": "2026-10-28",
+ "stations": [
+  {
+   "id": "talas",
+   "name": {
+    "en": "Talas",
+    "ir": "Talas",
+    "ru": "Талас"
+   },
+   "km": 0,
+   "line": "tb"
+  },
+  {
+   "id": "semiz",
+   "name": {
+    "en": "Semiz",
+    "ir": "Semiz",
+    "ru": "Семиз"
+   },
+   "km": 9,
+   "line": "tb"
+  },
+  {
+   "id": "tegirmen",
+   "name": {
+    "en": "Tegirmen",
+    "ir": "Tegirmen",
+    "ru": "Тегирмен"
+   },
+   "km": 25,
+   "line": "tb"
+  },
+  {
+   "id": "kara-bulak",
+   "name": {
+    "en": "Kara-Bulak",
+    "ir": "Kara-Bulak",
+    "ru": "Кара-Булак"
+   },
+   "km": 38,
+   "line": "tb"
+  },
+  {
+   "id": "kyzyl-adyr",
+   "name": {
+    "en": "Kyzyl-Adyr",
+    "ir": "Kızıl-Adır",
+    "ru": "Кызыл-Адыр"
+   },
+   "km": 58,
+   "line": "tb"
+  },
+  {
+   "id": "ak-dobo",
+   "name": {
+    "en": "Ak-Döbö",
+    "ir": "Ak-Döbö",
+    "ru": "Ак-Дёбё"
+   },
+   "km": 65,
+   "line": "tb"
+  },
+  {
+   "id": "eski-korgon",
+   "name": {
+    "en": "Eski-Korgon",
+    "ir": "Eski-Korgon",
+    "ru": "Эски-Коргон"
+   },
+   "km": 77,
+   "line": "tb"
+  },
+  {
+   "id": "aulie-ata",
+   "name": {
+    "en": "Aulie-Ata Junction",
+    "ir": "Aulie-Ata tüyünü",
+    "ru": "Аулие-Ата (узловая)"
+   },
+   "km": 100,
+   "line": "jn"
+  },
+  {
+   "id": "uchbulak",
+   "name": {
+    "en": "Uchbulak",
+    "ir": "Üchbulak",
+    "ru": "Учбулак"
+   },
+   "km": 118,
+   "line": "chu"
+  },
+  {
+   "id": "loop17",
+   "name": {
+    "en": "Passing loop No. 17",
+    "ir": "17-razyezd",
+    "ru": "Разъезд № 17"
+   },
+   "km": 152,
+   "line": "tech"
+  },
+  {
+   "id": "tash-tal",
+   "name": {
+    "en": "Tash-Tal",
+    "ir": "Tash-Tal",
+    "ru": "Таш-Тал"
+   },
+   "km": 171,
+   "line": "chu"
+  },
+  {
+   "id": "algabas",
+   "name": {
+    "en": "Algabas",
+    "ir": "Algabas",
+    "ru": "Алгабас"
+   },
+   "km": 184,
+   "line": "chu"
+  },
+  {
+   "id": "lugovoy",
+   "name": {
+    "en": "Lugovoy",
+    "ir": "Lugovoy",
+    "ru": "Луговой"
+   },
+   "km": 215,
+   "line": "chu"
+  },
+  {
+   "id": "kichi-talaa",
+   "name": {
+    "en": "Kichi-Talaa",
+    "ir": "Kichi-Talaa",
+    "ru": "Кичи-Талаа"
+   },
+   "km": 221,
+   "line": "chu"
+  },
+  {
+   "id": "karasu",
+   "name": {
+    "en": "Karasu",
+    "ir": "Karasuu",
+    "ru": "Карасу"
+   },
+   "km": 262,
+   "line": "chu"
+  },
+  {
+   "id": "akjol",
+   "name": {
+    "en": "Akjol",
+    "ir": "Akjol",
+    "ru": "Акжол"
+   },
+   "km": 282,
+   "line": "chu"
+  },
+  {
+   "id": "tasotkel",
+   "name": {
+    "en": "Tasötkel",
+    "ir": "Tasötkel",
+    "ru": "Тасоткель"
+   },
+   "km": 301,
+   "line": "chu"
+  },
+  {
+   "id": "jon-aryk",
+   "name": {
+    "en": "Jon-Aryk",
+    "ir": "Jon-Arık",
+    "ru": "Жон-Арык"
+   },
+   "km": 314,
+   "line": "chu"
+  },
+  {
+   "id": "besh-terek",
+   "name": {
+    "en": "Besh-Terek",
+    "ir": "Besh-Terek",
+    "ru": "Беш-Терек"
+   },
+   "km": 324,
+   "line": "chu"
+  },
+  {
+   "id": "nurzhan",
+   "name": {
+    "en": "Nurzhan",
+    "ir": "Nurzhan",
+    "ru": "Нуржан"
+   },
+   "km": 329,
+   "line": "chu"
+  },
+  {
+   "id": "depot",
+   "name": {
+    "en": "Nurzhan Freight Depot (halt)",
+    "ir": "Nurzhan jük bazası (ayalddama)",
+    "ru": "Нуржан-Грузовая (о.п.)"
+   },
+   "km": 333,
+   "line": "north"
+  }
+ ],
+ "fares": {
+  "long": {
+   "platskart": 18,
+   "kupe": 31,
+   "km": 329,
+   "min": 2
+  },
+  "sub": [
+   [
+    15,
+    1
+   ],
+   [
+    35,
+    1.5
+   ],
+   [
+    999,
+    2
+   ]
+  ],
+  "work": 0.5
+ },
+ "trains": [
+  {
+   "no": "1",
+   "kind": "long",
+   "days": "daily",
+   "from": "talas",
+   "to": "nurzhan",
+   "stops": [
+    [
+     "talas",
+     null,
+     "07:40"
+    ],
+    [
+     "semiz",
+     "07:52",
+     "07:53"
+    ],
+    [
+     "tegirmen",
+     "08:15",
+     "08:16"
+    ],
+    [
+     "kara-bulak",
+     "08:34",
+     "08:39"
+    ],
+    [
+     "kyzyl-adyr",
+     "09:06",
+     "09:10"
+    ],
+    [
+     "ak-dobo",
+     "09:20",
+     "09:21"
+    ],
+    [
+     "eski-korgon",
+     "09:37",
+     "09:38"
+    ],
+    [
+     "aulie-ata",
+     "10:09",
+     "10:31"
+    ],
+    [
+     "uchbulak",
+     "10:50",
+     "10:51"
+    ],
+    [
+     "loop17",
+     "11:27",
+     "11:30"
+    ],
+    [
+     "tash-tal",
+     "11:50",
+     "11:51"
+    ],
+    [
+     "algabas",
+     "12:05",
+     "12:06"
+    ],
+    [
+     "lugovoy",
+     "12:39",
+     "12:43"
+    ],
+    [
+     "kichi-talaa",
+     "12:49",
+     "12:50"
+    ],
+    [
+     "karasu",
+     "13:34",
+     "13:37"
+    ],
+    [
+     "akjol",
+     "13:58",
+     "14:00"
+    ],
+    [
+     "tasotkel",
+     "14:20",
+     "14:21"
+    ],
+    [
+     "jon-aryk",
+     "14:35",
+     "14:36"
+    ],
+    [
+     "besh-terek",
+     "14:47",
+     "14:48"
+    ],
+    [
+     "nurzhan",
+     "14:53",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "2",
+   "kind": "long",
+   "days": "daily",
+   "from": "nurzhan",
+   "to": "talas",
+   "stops": [
+    [
+     "nurzhan",
+     null,
+     "08:05"
+    ],
+    [
+     "besh-terek",
+     "08:10",
+     "08:11"
+    ],
+    [
+     "jon-aryk",
+     "08:22",
+     "08:23"
+    ],
+    [
+     "tasotkel",
+     "08:37",
+     "08:38"
+    ],
+    [
+     "akjol",
+     "08:58",
+     "09:00"
+    ],
+    [
+     "karasu",
+     "09:21",
+     "09:24"
+    ],
+    [
+     "kichi-talaa",
+     "10:08",
+     "10:09"
+    ],
+    [
+     "lugovoy",
+     "10:15",
+     "10:19"
+    ],
+    [
+     "algabas",
+     "10:52",
+     "10:53"
+    ],
+    [
+     "tash-tal",
+     "11:07",
+     "11:08"
+    ],
+    [
+     "loop17",
+     "11:28",
+     "11:31"
+    ],
+    [
+     "uchbulak",
+     "12:07",
+     "12:08"
+    ],
+    [
+     "aulie-ata",
+     "12:33",
+     "12:55"
+    ],
+    [
+     "eski-korgon",
+     "13:26",
+     "13:27"
+    ],
+    [
+     "ak-dobo",
+     "13:43",
+     "13:44"
+    ],
+    [
+     "kyzyl-adyr",
+     "13:54",
+     "13:58"
+    ],
+    [
+     "kara-bulak",
+     "14:25",
+     "14:30"
+    ],
+    [
+     "tegirmen",
+     "14:48",
+     "14:49"
+    ],
+    [
+     "semiz",
+     "15:11",
+     "15:12"
+    ],
+    [
+     "talas",
+     "15:24",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6001",
+   "kind": "sub",
+   "days": "daily",
+   "from": "nurzhan",
+   "to": "akjol",
+   "stops": [
+    [
+     "nurzhan",
+     null,
+     "06:20"
+    ],
+    [
+     "besh-terek",
+     "06:27",
+     "06:28"
+    ],
+    [
+     "jon-aryk",
+     "06:42",
+     "06:43"
+    ],
+    [
+     "tasotkel",
+     "07:02",
+     "07:03"
+    ],
+    [
+     "akjol",
+     "07:30",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6003",
+   "kind": "sub",
+   "days": "daily",
+   "from": "nurzhan",
+   "to": "akjol",
+   "stops": [
+    [
+     "nurzhan",
+     null,
+     "12:30"
+    ],
+    [
+     "besh-terek",
+     "12:37",
+     "12:38"
+    ],
+    [
+     "jon-aryk",
+     "12:52",
+     "12:53"
+    ],
+    [
+     "tasotkel",
+     "13:12",
+     "13:13"
+    ],
+    [
+     "akjol",
+     "13:40",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6005",
+   "kind": "sub",
+   "days": "daily",
+   "from": "nurzhan",
+   "to": "akjol",
+   "stops": [
+    [
+     "nurzhan",
+     null,
+     "17:50"
+    ],
+    [
+     "besh-terek",
+     "17:57",
+     "17:58"
+    ],
+    [
+     "jon-aryk",
+     "18:12",
+     "18:13"
+    ],
+    [
+     "tasotkel",
+     "18:32",
+     "18:33"
+    ],
+    [
+     "akjol",
+     "19:00",
+     null
+    ]
+   ],
+   "valid_to": "2026-10-31"
+  },
+  {
+   "no": "6011",
+   "kind": "sub",
+   "days": "daily",
+   "from": "nurzhan",
+   "to": "karasu",
+   "stops": [
+    [
+     "nurzhan",
+     null,
+     "15:10"
+    ],
+    [
+     "besh-terek",
+     "15:17",
+     "15:18"
+    ],
+    [
+     "jon-aryk",
+     "15:32",
+     "15:33"
+    ],
+    [
+     "tasotkel",
+     "15:52",
+     "15:53"
+    ],
+    [
+     "akjol",
+     "16:20",
+     "16:21"
+    ],
+    [
+     "karasu",
+     "16:50",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6002",
+   "kind": "sub",
+   "days": "daily",
+   "from": "akjol",
+   "to": "nurzhan",
+   "stops": [
+    [
+     "akjol",
+     null,
+     "07:45"
+    ],
+    [
+     "tasotkel",
+     "08:12",
+     "08:13"
+    ],
+    [
+     "jon-aryk",
+     "08:32",
+     "08:33"
+    ],
+    [
+     "besh-terek",
+     "08:47",
+     "08:48"
+    ],
+    [
+     "nurzhan",
+     "08:55",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6004",
+   "kind": "sub",
+   "days": "daily",
+   "from": "akjol",
+   "to": "nurzhan",
+   "stops": [
+    [
+     "akjol",
+     null,
+     "14:00"
+    ],
+    [
+     "tasotkel",
+     "14:27",
+     "14:28"
+    ],
+    [
+     "jon-aryk",
+     "14:47",
+     "14:48"
+    ],
+    [
+     "besh-terek",
+     "15:02",
+     "15:03"
+    ],
+    [
+     "nurzhan",
+     "15:10",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6006",
+   "kind": "sub",
+   "days": "daily",
+   "from": "akjol",
+   "to": "nurzhan",
+   "stops": [
+    [
+     "akjol",
+     null,
+     "19:15"
+    ],
+    [
+     "tasotkel",
+     "19:42",
+     "19:43"
+    ],
+    [
+     "jon-aryk",
+     "20:02",
+     "20:03"
+    ],
+    [
+     "besh-terek",
+     "20:17",
+     "20:18"
+    ],
+    [
+     "nurzhan",
+     "20:25",
+     null
+    ]
+   ],
+   "valid_to": "2026-10-31"
+  },
+  {
+   "no": "6012",
+   "kind": "sub",
+   "days": "daily",
+   "from": "karasu",
+   "to": "nurzhan",
+   "stops": [
+    [
+     "karasu",
+     null,
+     "05:40"
+    ],
+    [
+     "akjol",
+     "06:09",
+     "06:10"
+    ],
+    [
+     "tasotkel",
+     "06:37",
+     "06:38"
+    ],
+    [
+     "jon-aryk",
+     "06:57",
+     "06:58"
+    ],
+    [
+     "besh-terek",
+     "07:12",
+     "07:13"
+    ],
+    [
+     "nurzhan",
+     "07:20",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6005",
+   "kind": "sub",
+   "days": "daily",
+   "from": "nurzhan",
+   "to": "akjol",
+   "stops": [
+    [
+     "nurzhan",
+     null,
+     "17:10"
+    ],
+    [
+     "besh-terek",
+     "17:17",
+     "17:18"
+    ],
+    [
+     "jon-aryk",
+     "17:32",
+     "17:33"
+    ],
+    [
+     "tasotkel",
+     "17:52",
+     "17:53"
+    ],
+    [
+     "akjol",
+     "18:20",
+     null
+    ]
+   ],
+   "valid_from": "2026-11-01"
+  },
+  {
+   "no": "6006",
+   "kind": "sub",
+   "days": "daily",
+   "from": "akjol",
+   "to": "nurzhan",
+   "stops": [
+    [
+     "akjol",
+     null,
+     "18:35"
+    ],
+    [
+     "tasotkel",
+     "19:02",
+     "19:03"
+    ],
+    [
+     "jon-aryk",
+     "19:22",
+     "19:23"
+    ],
+    [
+     "besh-terek",
+     "19:37",
+     "19:38"
+    ],
+    [
+     "nurzhan",
+     "19:45",
+     null
+    ]
+   ],
+   "valid_from": "2026-11-01"
+  },
+  {
+   "no": "6201",
+   "kind": "work",
+   "days": "1-6",
+   "from": "nurzhan",
+   "to": "depot",
+   "stops": [
+    [
+     "nurzhan",
+     null,
+     "06:50"
+    ],
+    [
+     "depot",
+     "07:02",
+     null
+    ]
+   ]
+  },
+  {
+   "no": "6202",
+   "kind": "work",
+   "days": "1-6",
+   "from": "depot",
+   "to": "nurzhan",
+   "stops": [
+    [
+     "depot",
+     null,
+     "16:20"
+    ],
+    [
+     "nurzhan",
+     "16:32",
+     null
+    ]
+   ]
+  }
+ ]
+}

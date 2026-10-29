@@ -1,0 +1,67 @@
+{
+  "updated": "2026-10-28",
+  "consignments": [
+    {
+      "no": "TJ 26-004417",
+      "goods": { "en": "Wheat, in bulk (1,620 t)", "ir": "Buuday, chachma (1 620 t)", "ru": "Пшеница навалом (1 620 т)" },
+      "wagons": { "en": "24 covered grain hoppers", "ir": "24 jabık dan vagonu", "ru": "24 крытых вагона-зерновоза" },
+      "from": { "en": "Kara-Bulak", "ir": "Kara-Bulak", "ru": "Кара-Булак" },
+      "to": { "en": "Nurzhan, siding No. 7 (Nurzhan Agro-Industrial)", "ir": "Nurzhan, №7 tarmak (Nurzhan Agro-Industrial)", "ru": "Нуржан, подъездной путь № 7 («Нуржан Агро-Индастриал»)" },
+      "consignee": { "en": "Nurzhan Agro-Industrial", "ir": "Nurzhan Agro-Industrial", "ru": "«Нуржан Агро-Индастриал»" },
+      "events": [
+        { "date": "2026-10-24", "time": "16:40", "text": { "en": "Loaded and sealed at Kara-Bulak; documents accepted.", "ir": "Kara-Bulakta jüktölüp, plombalandı; dokumentter kabıl alındı.", "ru": "Погружено и опломбировано в Кара-Булаке; документы приняты." } },
+        { "date": "2026-10-25", "time": "21:15", "text": { "en": "Left Aulie-Ata Junction with freight train 3304.", "ir": "3304 jük poyezdi menen Aulie-Ata tüyününön chıktı.", "ru": "Отправлено с узловой Аулие-Ата с грузовым поездом 3304." } },
+        { "date": "2026-10-26", "time": "06:05", "text": { "en": "Arrived at Nurzhan Rail Freight Depot, receiving yard.", "ir": "Nurzhan jük bazasının kabıl aluu parkına keldi.", "ru": "Прибыло на станцию Нуржан-Грузовая, приёмный парк." } },
+        { "date": "2026-10-27", "time": "09:30", "text": { "en": "Placed at siding No. 7 and handed to the consignee.", "ir": "№7 tarmakka koyulup, aluuchuga tapshırıldı.", "ru": "Подано на подъездной путь № 7 и выдано получателю." } }
+      ]
+    },
+    {
+      "no": "TJ 26-004503",
+      "goods": { "en": "Frozen beef (6 refrigerated containers)", "ir": "Toñdurulgan uy eti (6 muzdatkıch konteyner)", "ru": "Мороженая говядина (6 рефрижераторных контейнеров)" },
+      "wagons": { "en": "3 container flat wagons", "ir": "3 konteyner platformasy", "ru": "3 фитинговые платформы" },
+      "from": { "en": "Talas, export zone sidings", "ir": "Talas, eksport zonasının tarmaktarı", "ru": "Талас, подъездные пути экспортной зоны" },
+      "to": { "en": "Shymkent (Kazakhstan Temir Zholy) via the Talas North Terminal", "ir": "Shımkent (Kazakstan Temir Jolu), Talas Tündük terminalı arkıluu", "ru": "Шымкент (КТЖ) через Таласский Северный терминал" },
+      "events": [
+        { "date": "2026-10-27", "time": "11:20", "text": { "en": "Loaded at the cold-chain terminal; customs seal applied.", "ir": "Muzdatkıch terminalda jüktöldü; bajı plombası koyuldu.", "ru": "Погружено на терминале холодовой цепи; наложена таможенная пломба." } },
+        { "date": "2026-10-27", "time": "19:45", "text": { "en": "Left Talas with freight train 2207.", "ir": "2207 jük poyezdi menen Talastan chıktı.", "ru": "Отправлено из Таласа с грузовым поездом 2207." } },
+        { "date": "2026-10-28", "time": "08:10", "text": { "en": "Handed over to Kazakhstan Temir Zholy at the Talas North Terminal.", "ir": "Talas Tündük terminalında Kazakstan Temir Joluna tapshırıldı.", "ru": "Передано КТЖ на Таласском Северном терминале." } }
+      ]
+    },
+    {
+      "no": "TJ 26-004521",
+      "goods": { "en": "Diesel fuel (1,080 t)", "ir": "Dizel küyüüchü mayı (1 080 t)", "ru": "Дизельное топливо (1 080 т)" },
+      "wagons": { "en": "18 tank cars", "ir": "18 tsisterna", "ru": "18 цистерн" },
+      "from": { "en": "Nurzhan, siding No. 3 (Nurzhan Oil Refinery)", "ir": "Nurzhan, №3 tarmak (Nurzhan munay kaytaruu zavodu)", "ru": "Нуржан, подъездной путь № 3 (Нуржанский НПЗ)" },
+      "to": { "en": "Otar (Kazakhstan Temir Zholy) via the Nurzhan rail border station", "ir": "Otar (Kazakstan Temir Jolu), Nurzhan chek ara beketi arkıluu", "ru": "Отар (КТЖ) через пограничную станцию Нуржан" },
+      "events": [
+        { "date": "2026-10-28", "time": "03:30", "text": { "en": "Loaded at the refinery siding; documents accepted.", "ir": "Zavod tarmagında jüktöldü; dokumentter kabıl alındı.", "ru": "Погружено на подъездном пути НПЗ; документы приняты." } },
+        { "date": "2026-10-28", "time": "14:50", "text": { "en": "Left Nurzhan Rail Freight Depot with freight train 1102.", "ir": "1102 jük poyezdi menen Nurzhan jük bazasınan chıktı.", "ru": "Отправлено со станции Нуржан-Грузовая с поездом 1102." } },
+        { "date": "2026-10-28", "time": "18:25", "text": { "en": "At the Nurzhan rail border station, waiting for exchange.", "ir": "Nurzhan chek ara beketinde, tapshıruunu kütüp turat.", "ru": "На пограничной станции Нуржан, ожидает передачи." } }
+      ]
+    },
+    {
+      "no": "TJ 26-004530",
+      "goods": { "en": "Cotton lint, pressed bales (410 t)", "ir": "Pakta talchası, kıssılgan tüyündör (410 t)", "ru": "Хлопковое волокно в кипах (410 т)" },
+      "wagons": { "en": "7 covered wagons", "ir": "7 jabık vagon", "ru": "7 крытых вагонов" },
+      "from": { "en": "Talas", "ir": "Talas", "ru": "Талас" },
+      "to": { "en": "Kazakhstan Temir Zholy via the Talas North Terminal, for China", "ir": "Kıtay üchün, Talas Tündük terminalı arkıluu Kazakstan Temir Joluna", "ru": "КТЖ через Таласский Северный терминал, далее в Китай" },
+      "consignee": { "en": "Xinjiang Lihua Cotton Facilities", "ir": "Xinjiang Lihua pakta ishkanası", "ru": "Синьцзян Лихуа (хлопковые предприятия)" },
+      "events": [
+        { "date": "2026-10-28", "time": "10:00", "text": { "en": "Wagons ordered for 29 October.", "ir": "Vagondor 29-oktyabrga buyurtma kılındı.", "ru": "Вагоны заказаны на 29 октября." } }
+      ]
+    },
+    {
+      "no": "TJ 26-004538",
+      "goods": { "en": "Empty bulk bags (big bags), returned", "ir": "Bosh chong kaptar (big-beg), kaytarılgan", "ru": "Порожние мягкие контейнеры (биг-бэги), возврат" },
+      "wagons": { "en": "1 covered wagon", "ir": "1 jabık vagon", "ru": "1 крытый вагон" },
+      "from": { "en": "Otar (Kazakhstan Temir Zholy) via the Nurzhan rail border station", "ir": "Otar (Kazakstan Temir Jolu), Nurzhan chek ara beketi arkıluu", "ru": "Отар (КТЖ) через пограничную станцию Нуржан" },
+      "to": { "en": "Nurzhan, siding No. 14 (bonded terminal)", "ir": "Nurzhan, №14 tarmak (bajı terminalı)", "ru": "Нуржан, подъездной путь № 14 (таможенный терминал)" },
+      "consignee": { "en": "Trans-Chuy Freight & Logistics", "ir": "Trans-Chüy Jük Tashuu Kompaniyası", "ru": "«Транс-Чуй Фрейт энд Логистикс»" },
+      "events": [
+        { "date": "2026-10-21", "time": "05:40", "text": { "en": "Received from Kazakhstan Temir Zholy at the Nurzhan rail border station.", "ir": "Nurzhan chek ara beketinde Kazakstan Temir Jolunan kabıl alındı.", "ru": "Принято от КТЖ на пограничной станции Нуржан." } },
+        { "date": "2026-10-21", "time": "13:15", "text": { "en": "Arrived at Nurzhan Rail Freight Depot.", "ir": "Nurzhan jük bazasına keldi.", "ru": "Прибыло на станцию Нуржан-Грузовая." } },
+        { "date": "2026-10-22", "time": "07:50", "text": { "en": "Placed at siding No. 14 under customs seal and handed to the consignee.", "ir": "Bajı plombası menen №14 tarmakka koyulup, aluuchuga tapshırıldı.", "ru": "Подано на путь № 14 под таможенной пломбой и выдано получателю." } }
+      ]
+    }
+  ]
+}
