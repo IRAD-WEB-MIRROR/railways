@@ -274,3 +274,4 @@ ul.plain li { margin-bottom: 4px; list-style: square; }
 .board td:first-child { white-space: nowrap; }
 .board td:last-child { min-width: 170px; }
 .board .st { border: 0; }
+.facts.lost tr.claimed td { color: #888; }

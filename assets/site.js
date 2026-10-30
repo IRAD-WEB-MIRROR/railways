@@ -1,7 +1,7 @@
 /* railways.iradgov.org: site script. Header, footer, language and the data-driven parts (timetable, live running, freight). */
 (function () {
   "use strict";
-  var SITE = {"store": "tj_lang", "nav": [["home", "/"], ["timetable", "/timetable.html"], ["passengers", "/passengers.html"], ["freight", "/freight.html"], ["network", "/network.html"], ["about", "/about.html"]], "navAlias": {}, "links": [["gov", "https://iradgov.org/"], ["eirad", "https://e-irad.org/"], ["bank", "https://bank.iradgov.org/"], ["arch", "https://archives.iradgov.org/"], ["post", "https://post.iradgov.org/"], ["elections", "https://elections.iradgov.org/"], ["court", "https://court.iradgov.org/"], ["stats", "https://stats.iradgov.org/"], ["mejlis", "https://mejlis.iradgov.org/"], ["gidromet", "https://gidromet.iradgov.org/"], ["jandarm", "https://jandarm.iradgov.org/"], ["customs", "https://customs.iradgov.org/"], ["avia", "https://avia.iradgov.org/"]], "mastBtn": "/timetable.html"};
+  var SITE = {"store": "tj_lang", "nav": [["home", "/"], ["timetable", "/timetable.html"], ["passengers", "/passengers.html"], ["freight", "/freight.html"], ["network", "/network.html"], ["about", "/about.html"]], "navAlias": {"lost": "passengers"}, "links": [["gov", "https://iradgov.org/"], ["eirad", "https://e-irad.org/"], ["bank", "https://bank.iradgov.org/"], ["arch", "https://archives.iradgov.org/"], ["post", "https://post.iradgov.org/"], ["elections", "https://elections.iradgov.org/"], ["court", "https://court.iradgov.org/"], ["stats", "https://stats.iradgov.org/"], ["mejlis", "https://mejlis.iradgov.org/"], ["gidromet", "https://gidromet.iradgov.org/"], ["jandarm", "https://jandarm.iradgov.org/"], ["customs", "https://customs.iradgov.org/"], ["avia", "https://avia.iradgov.org/"]], "mastBtn": "/timetable.html"};
   var EXTRA = function () {
     var ids = ["board", "search", "ttLong", "ttSub", "fares", "yard", "track", "wxLine"];
     if (!ids.some(function (i) { return document.getElementById(i); })) return;
@@ -341,7 +341,7 @@
     }
     if (side) {
       side.innerHTML =
-        '<div class="sbox"><h4>' + esc(t("sideP")) + "</h4>" + sideLinks([["/timetable.html", "sSearch"], ["/timetable.html#ttLong", "nav_timetable"], ["/timetable.html#ttSub", "sSub"], ["/passengers.html", "sTickets"], ["/timetable.html#ttSub", "sChange", true]]) + "</div>" +
+        '<div class="sbox"><h4>' + esc(t("sideP")) + "</h4>" + sideLinks([["/timetable.html", "sSearch"], ["/timetable.html#ttLong", "nav_timetable"], ["/timetable.html#ttSub", "sSub"], ["/passengers.html", "sTickets"], ["/lost-property.html", "sLost"], ["/timetable.html#ttSub", "sChange", true]]) + "</div>" +
         '<div class="sbox"><h4>' + esc(t("sideF")) + "</h4>" + sideLinks([["/freight.html#yard", "sYard"], ["/freight.html#track", "sTrack"], ["/freight.html#notices", "sFrN"]]) + "</div>" +
         '<div class="sbox"><h4>' + esc(t("sideR")) + "</h4>" + sideLinks([["/about.html", "nav_about"], ["/network.html", "nav_network"]]) + "</div>" +
         '<div class="sbox"><h4 class="y">' + esc(t("helpK")) + '</h4><div class="in"><span class="ph">' + esc(t("helpN")) + '</span><br><span class="small muted">' + esc(t("helpH")) + "</span></div></div>" +
@@ -406,12 +406,47 @@
       }).join("");
     }).catch(function () { failBox(el); });
   }
+  /* lost property: four weeks of finds, published each Monday, seeded from the date (same list for everyone) */
+  function lostProperty() {
+    var el = $("#lost");
+    if (!el) return;
+    getJSON("/data/lost.json").then(function (L) {
+      function ymd(d) { return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate()); }
+      var p = iradToday().split("-"), now = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+      var mon = new Date(now.getTime() - ((now.getUTCDay() + 6) % 7) * 864e5);
+      var a = new Date(mon.getTime() - 28 * 864e5), b = new Date(mon.getTime() - 864e5);
+      /* where each train ends, and how likely something is left on it */
+      var TR = [["1", "lpStNurzhan", .55], ["2", "lpStTalas", .55], ["6001", "lpStAkjol", .12], ["6002", "lpStNurzhan", .12], ["6003", "lpStAkjol", .1],
+        ["6004", "lpStNurzhan", .1], ["6005", "lpStAkjol", .14], ["6006", "lpStNurzhan", .12], ["6011", "lpStKarasu", .1], ["6012", "lpStNurzhan", .14], ["6201", "lpStDepot", .04]];
+      var rows = [], used = {};
+      for (var d = new Date(b.getTime()); d >= a; d = new Date(d.getTime() - 864e5)) {
+        var ds = ymd(d), n = 0;
+        TR.forEach(function (tr, k) {
+          if (hash01("lp|" + ds + "|" + tr[0]) >= tr[2]) return;
+          var r = hash01(tr[0] + "#" + ds), it = Math.floor(r * L.items.length);
+          while (used[it]) it = (it + 7) % L.items.length;
+          used[it] = 1;
+          var doy = Math.round((d - Date.UTC(d.getUTCFullYear(), 0, 1)) / 864e5) + 1;
+          n++;
+          rows.push({ d: ds, ref: String(d.getUTCFullYear()).slice(2) + "/" + ("00" + doy).slice(-3) + "-" + n, item: L.items[it], tr: tr[0], kept: tr[1],
+            claimed: (b - d) / 864e5 > 2 && hash01("claim|" + ds + tr[0]) < .3 });
+        });
+        if (Object.keys(used).length > L.items.length - 4) used = {};
+      }
+      el.innerHTML = '<p class="small muted">' + esc(t("lpList", { d: fmtDate(ymd(mon)), a: fmtDate(ymd(a)), b: fmtDate(ymd(b)) })) + "</p>" +
+        '<div class="tbl-wrap"><table class="facts lost"><thead><tr><th>' + esc(t("lpThDate")) + "</th><th>" + esc(t("lpThRef")) + "</th><th>" + esc(t("lpThItem")) + "</th><th>" + esc(t("lpThTrain")) + "</th><th>" + esc(t("lpThKept")) + "</th></tr></thead><tbody>" +
+        rows.map(function (x) {
+          return "<tr" + (x.claimed ? ' class="claimed"' : "") + '><td class="nw">' + esc(fmtDate(x.d)) + '</td><td class="nw">' + esc(x.ref) + "</td><td>" + (x.claimed ? "<s>" + esc(tri(x.item)) + "</s> <i>" + esc(t("lpClaimed")) + "</i>" : esc(tri(x.item))) + "</td><td>" + esc(x.tr) + "</td><td>" + esc(t(x.kept)) + "</td></tr>";
+        }).join("") + "</tbody></table></div>";
+    }).catch(function () { failBox(el); });
+  }
   function render() {
     chrome();
     staticText();
     dates();
     countdowns();
     notices();
+    lostProperty();
     if (EXTRA) EXTRA();
   }
   render();
