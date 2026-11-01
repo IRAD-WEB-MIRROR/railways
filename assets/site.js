@@ -15,7 +15,10 @@
       function money(x) { var s = (Math.round(x * 100) / 100).toFixed(x % 1 ? 2 : 0); return LANG === "en" ? s : s.replace(".", ","); }
       function addDays(d, n) { var p = d.split("-"), x = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n)); return x.getUTCFullYear() + "-" + pad(x.getUTCMonth() + 1) + "-" + pad(x.getUTCDate()); }
       function dow(d) { var p = d.split("-"); var w = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).getUTCDay(); return w === 0 ? 7 : w; }
+      /* winter timetable 1 November - 31 March, the same dates as the season block in today's numbers */
+      function period(d) { var md = d.slice(5); return md >= "11-01" || md <= "03-31" ? "winter" : "summer"; }
       function runs(tr, d) {
+        if (tr.season && tr.season !== period(d)) return false;
         if (tr.valid_from && d < tr.valid_from) return false;
         if (tr.valid_to && d > tr.valid_to) return false;
         if (tr.days === "1-6" && dow(d) === 7) return false;
@@ -181,7 +184,7 @@
               ids.map(function (id) { return "<tr><td>" + esc(sn(id)) + "</td>" + arr.map(function (tr) { var s = tr.stops.filter(function (x) { return x[0] === id; })[0]; return '<td class="nw">' + (s ? stopTime(s) : "—") + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
           };
           return "<h3>" + esc(g[1]) + "</h3>" + (g[0] === "depot" ? '<p class="small">' + esc(t("gDepotN")) + "</p>" : "") + tbl(out) + tbl(back);
-        }).join("") + (T.trains.some(function (tr) { return tr.valid_from && tr.valid_from > today; }) ? '<p class="small"><b>' + esc(t("gWinter")) + "</b></p>" : "");
+        }).join("") + '<p class="small"><b id="ttPeriod">' + esc(t("gPeriod_" + period(today))) + "</b> " + esc(t("gWinter")) + "</p>";
       }
       if ((el2 = $("#fares"))) {
         var F = T.fares, rows = [["talas", "kara-bulak"], ["talas", "kyzyl-adyr"], ["talas", "aulie-ata"], ["talas", "lugovoy"], ["talas", "nurzhan"], ["kyzyl-adyr", "nurzhan"], ["aulie-ata", "nurzhan"]];
