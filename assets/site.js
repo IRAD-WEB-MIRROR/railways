@@ -1,7 +1,7 @@
 /* railways.iradgov.org: site script. Header, footer, language and the data-driven parts (timetable, live running, freight). */
 (function () {
   "use strict";
-  var SITE = {"store": "tj_lang", "nav": [["home", "/"], ["timetable", "/timetable.html"], ["passengers", "/passengers.html"], ["freight", "/freight.html"], ["network", "/network.html"], ["about", "/about.html"]], "navAlias": {"lost": "passengers"}, "links": [["gov", "https://iradgov.org/"], ["eirad", "https://e-irad.org/"], ["bank", "https://bank.iradgov.org/"], ["arch", "https://archives.iradgov.org/"], ["post", "https://post.iradgov.org/"], ["elections", "https://elections.iradgov.org/"], ["court", "https://court.iradgov.org/"], ["stats", "https://stats.iradgov.org/"], ["mejlis", "https://mejlis.iradgov.org/"], ["gidromet", "https://gidromet.iradgov.org/"], ["jandarm", "https://jandarm.iradgov.org/"], ["customs", "https://customs.iradgov.org/"], ["avia", "https://avia.iradgov.org/"], ["talas", "https://talas.iradgov.org/"], ["nurzhan", "https://nurzhan.iradgov.org/"], ["iyikjanyl", "https://iyikjanyl.iradgov.org/"], ["heritage", "https://heritage.iradgov.org/"]], "mastBtn": "/timetable.html"};
+  var SITE = {"store": "tj_lang", "nav": [["home", "/"], ["timetable", "/timetable.html"], ["passengers", "/passengers.html"], ["freight", "/freight.html"], ["network", "/network.html"], ["about", "/about.html"]], "navAlias": {"lost": "passengers", "leadership": "about", "contacts": "about", "news": "about", "documents": "about", "vacancies": "about", "faq": "about"}, "ent": [["/leadership.html", "kit_nav_leadership"], ["/news.html", "kit_nav_news"], ["/documents.html", "kit_nav_documents"], ["/vacancies.html", "kit_nav_vacancies"], ["/faq.html", "kit_nav_faq"], ["/contacts.html", "kit_nav_contacts"]], "links": [["gov", "https://iradgov.org/"], ["eirad", "https://e-irad.org/"], ["bank", "https://bank.iradgov.org/"], ["arch", "https://archives.iradgov.org/"], ["post", "https://post.iradgov.org/"], ["elections", "https://elections.iradgov.org/"], ["court", "https://court.iradgov.org/"], ["stats", "https://stats.iradgov.org/"], ["mejlis", "https://mejlis.iradgov.org/"], ["gidromet", "https://gidromet.iradgov.org/"], ["jandarm", "https://jandarm.iradgov.org/"], ["customs", "https://customs.iradgov.org/"], ["avia", "https://avia.iradgov.org/"], ["talas", "https://talas.iradgov.org/"], ["nurzhan", "https://nurzhan.iradgov.org/"], ["iyikjanyl", "https://iyikjanyl.iradgov.org/"], ["heritage", "https://heritage.iradgov.org/"]], "mastBtn": "/timetable.html"};
   var EXTRA = function () {
     var ids = ["board", "search", "ttLong", "ttSub", "fares", "yard", "track", "wxLine"];
     if (!ids.some(function (i) { return document.getElementById(i); })) return;
@@ -294,7 +294,7 @@
   function failBox(el) { if (el) el.innerHTML = '<p class="muted">' + esc(t("loadFail")) + "</p>"; }
 
   /* ---------- chrome ---------- */
-  function navHTML() {
+  function menuHTML() {
     return SITE.nav.map(function (n) {
       var cur = n[0] === PAGE || (SITE.navAlias[PAGE] === n[0]);
       return '<li><a href="' + n[1] + '"' + (cur ? ' aria-current="page"' : "") + ">" + esc(t("nav_" + n[0])) + "</a></li>";
@@ -317,14 +317,14 @@
     if (top) {
       top.innerHTML =
         '<a class="skip" href="#main">' + esc(t("skip")) + "</a>" +
-        '<div class="strip"><div><span class="lnk"><a href="/">' + esc(t("nav_home")) + '</a><a href="/about.html">' + esc(t("stripCont")) + '</a><a href="mailto:info@railways.iradgov.org">' + esc(t("stripMail")) + '</a></span><span class="clock" id="clock"></span></div>' +
+        '<div class="strip"><div><span class="lnk"><a href="/">' + esc(t("nav_home")) + '</a><a href="/contacts.html">' + esc(t("stripCont")) + '</a><a href="mailto:info@railways.iradgov.org">' + esc(t("stripMail")) + '</a></span><span class="clock" id="clock"></span></div>' +
         '<div class="langs" role="group" aria-label="' + esc(t("langLabel")) + '">' +
         ["ru", "ir", "en"].map(function (l) { return '<button type="button" data-lang="' + l + '" aria-pressed="' + (l === LANG) + '" lang="' + I.htmlLang[l] + '">' + esc(I.langs[l]) + "</button>"; }).join("") +
         "</div></div>" +
         '<div class="mast"><div class="photo-strip" aria-hidden="true"></div><a class="home-link" href="/"><img class="mark" src="/assets/brand/temirjolu-mark-white.svg" alt="' + esc(t("markAlt")) + '" width="74" height="74">' +
         '<div class="ttl"><div class="k">' + esc(t("mastK")) + '</div><div class="n">' + esc(t("mastN")) + '</div><div class="s">' + esc(t("mastS")) + "</div></div></a>" +
         '<div class="help">' + esc(t("helpK")) + "<b>" + esc(t("helpN")) + "</b>" + esc(t("helpH")) + "</div></div>" +
-        '<nav class="nav" aria-label="' + esc(t("navLabel")) + '"><button class="burger" type="button" aria-expanded="false"><span class="bars"></span>' + esc(t("menu")) + '</button><ul class="menu">' + navHTML() + "</ul></nav>" +
+        '<nav class="nav" aria-label="' + esc(t("navLabel")) + '"><button class="burger" type="button" aria-expanded="false"><span class="bars"></span>' + esc(t("menu")) + '</button><ul class="menu">' + menuHTML() + "</ul></nav>" +
         '<div class="ticker" id="ticker" hidden><span class="lbl">' + esc(t("tickLbl")) + '</span><div class="run"><span id="tickRun"></span></div></div>';
       $(".burger", top).addEventListener("click", function () {
         var nav = $(".nav", top), open = !nav.classList.contains("open");
@@ -346,14 +346,14 @@
       side.innerHTML =
         '<div class="sbox"><h4>' + esc(t("sideP")) + "</h4>" + sideLinks([["/timetable.html", "sSearch"], ["/timetable.html#ttLong", "nav_timetable"], ["/timetable.html#ttSub", "sSub"], ["/passengers.html", "sTickets"], ["/lost-property.html", "sLost"], ["/timetable.html#ttSub", "sChange", true]]) + "</div>" +
         '<div class="sbox"><h4>' + esc(t("sideF")) + "</h4>" + sideLinks([["/freight.html#yard", "sYard"], ["/freight.html#track", "sTrack"], ["/freight.html#notices", "sFrN"]]) + "</div>" +
-        '<div class="sbox"><h4>' + esc(t("sideR")) + "</h4>" + sideLinks([["/about.html", "nav_about"], ["/network.html", "nav_network"]]) + "</div>" +
+        '<div class="sbox"><h4>' + esc(t("sideR")) + "</h4>" + sideLinks([["/about.html", "nav_about"]].concat(SITE.ent, [["/network.html", "nav_network"]])) + "</div>" +
         '<div class="sbox"><h4 class="y">' + esc(t("helpK")) + '</h4><div class="in"><span class="ph">' + esc(t("helpN")) + '</span><br><span class="small muted">' + esc(t("helpH")) + "</span></div></div>" +
         '<div class="sbox links"><h4>' + esc(t("linksH")) + "</h4><ul>" + SITE.links.map(function (l) { return '<li><a href="' + l[1] + '">' + esc(t("link_" + l[0])) + "</a></li>"; }).join("") + "</ul></div>" +
         counter();
     }
     if (bottom) {
       bottom.innerHTML =
-        '<footer class="foot"><div class="fl">' + SITE.nav.map(function (n) { return '<a href="' + n[1] + '">' + esc(t("nav_" + n[0])) + "</a>"; }).join("") + "</div>" +
+        '<footer class="foot"><div class="fl">' + SITE.nav.map(function (n) { return '<a href="' + n[1] + '">' + esc(t("nav_" + n[0])) + "</a>"; }).concat(SITE.ent.map(function (l) { return '<a href="' + l[0] + '">' + esc(t(l[1])) + "</a>"; })).join("") + "</div>" +
         '<div class="row"><div><img class="fmark" src="/assets/brand/temirjolu-mark-white.svg" alt="" width="30" height="30">' + esc(t("footCopy", { y: iradNow().getFullYear() })) + "<br>" + esc(t("footCite")) + "</div>" +
         '<address style="font-style:normal">' + t("footAddr") + "</address></div>" +
         '<div class="best">' + esc(t("footBest")) + " " + esc(t("footTime")) + "</div></footer>";

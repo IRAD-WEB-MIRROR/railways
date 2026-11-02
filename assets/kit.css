@@ -1,0 +1,15 @@
+/* leadership, contacts, news, documents, vacancies and FAQ pages */
+.kit-head { margin-bottom: 10px; }
+.kit-post { color: var(--muted, #666); margin: -4px 0 14px; }
+.kit-thumb { float: right; width: 72px; height: auto; margin: 0 0 8px 12px; border: 1px solid var(--line, #ddd); }
+.kit-year { margin: 30px 0 6px; font-size: 1.2rem; border-bottom: 2px solid var(--blue, #2b4c7e); padding-bottom: 4px; }
+.kit-faq { background: #fff; border: 1px solid var(--line, #ddd); margin: 0 0 8px; }
+.kit-faq summary { cursor: pointer; padding: 12px 16px; font-weight: 600; }
+.kit-faq[open] summary { border-bottom: 1px solid var(--line, #ddd); }
+.kit-faq > div { padding: 4px 16px 6px; }
+.kit-phones td { padding: 6px 4px; }
+.kit-vac.is-closed { opacity: .65; }
+.kit-fulldoc .body p { max-width: 780px; }
+.kit-home { margin-top: 10px; padding-bottom: 10px; }
+.kit-home .plist .s { display: none; }
+.nw { white-space: nowrap; }
