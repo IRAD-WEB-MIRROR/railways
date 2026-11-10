@@ -59,6 +59,11 @@
         return null;
       }
       var ROUT = { long: ["rLoop", "rTrack", "rLoco", "rLoop", "rBorder"], sub: ["rLate", "rTrack", "rLoop"], work: ["rLate"] };
+      function railInc(W, d) {
+        return (W && W.incidents && W.incidents.list || []).filter(function (x) {
+          return x.rail && x.start.slice(0, 10) <= d && (!x.end || d <= x.end.slice(0, 10));
+        })[0] || null;
+      }
       function delay(tr, d, W) {
         var r = h01(d + "|" + tr.no), r2 = h01(tr.no + "/" + d), D = 0, why = null, cancelled = false;
         if (tr.kind === "long") {
@@ -71,6 +76,12 @@
         var places = tr.kind === "long" ? ["talas", "nurzhan"] : ["nurzhan"], wx = null;
         places.forEach(function (p) { var e = wxEffect(code(W, p, d), r2); if (e && (!wx || e.min > wx.min)) wx = e; });
         if (wx) { D += wx.min; why = wx.why; if (wx.heavy && tr.kind !== "long" && r < 0.3) cancelled = true; }
+        var ri = railInc(W, d);   /* an incident on the line (today.json's shared list) sets the floor for the day's delays */
+        if (ri && (tr.kind === "long" || ri.rail.places.indexOf("nurzhan") >= 0)) {
+          var im = Math.round(ri.rail.delay_min * (tr.kind === "long" ? 0.6 + 0.4 * r2 : 0.3 + 0.3 * r2));
+          if (im > D) { D = im; why = ri.kind === "thunderstorm" ? "rStorm" : "rSnow"; }
+          if (tr.kind === "sub" && ri.rail.cancel.indexOf("sub") >= 0 && r < 0.4) cancelled = true;
+        }
         return { min: D, why: why, cancelled: cancelled, known: !!W && (W.date === d || addDays(W.date, 1) === d) };
       }
       /* expected time at each stop: the delay builds up along the way */
@@ -100,6 +111,12 @@
           else el.innerHTML = '<span class="live">' + esc(t("lnLive")) + "</span> " + esc(t("wxOn")) + " " + (W.weather || []).filter(function (p) { return p.id === "talas" || p.id === "nurzhan"; }).map(function (p) {
             return "<b>" + esc(tri(p.name)) + "</b> " + esc(tri(p.label)) + ", " + p.high + "°";
           }).join(" · ") + ' <a class="small" href="https://gidromet.iradgov.org/">' + esc(t("wxMore")) + "</a>";
+        }
+        /* an incident on the line today (the shared list in today.json), above the board */
+        if ((el = $("#incRail"))) {
+          var ri = railInc(W, today);
+          el.innerHTML = ri ? '<p class="small"><b>⚠ ' + esc(fmtDate(today)) + ": " + esc(tri(ri.lines && ri.lines.rail || ri.notice)) + "</b></p>"
+            : W ? '<p class="small muted">' + esc(fmtDate(today)) + ": " + esc(t("incNone")) + "</p>" : "";
         }
         /* today's trains */
         if ((el = $("#board"))) {
