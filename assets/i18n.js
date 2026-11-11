@@ -404,7 +404,7 @@ window.SITE_I18N = {
       "sChange": "1-noyabrdan poyezd ubaktısının özgörüshü",
       "sNew": "JAÑI",
       "sYard": "Bügünkü jük ishi",
-      "sTrack": "Jükdü tekshirüü",
+      "sTrack": "Jükdü teksherüü",
       "sFrN": "Jönötüüchülörgö bildirüülör",
       "helpK": "Maalımat kızmatı",
       "helpH": "kecheyi-kündüzü",
