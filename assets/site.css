@@ -310,3 +310,29 @@ main .kit-faq summary { padding: 5px 10px; font-weight: bold; color: #0d5c8c; }
 main .kit-faq > div { padding: 6px 10px 2px; }
 main .kit-home { margin: 0; padding: 0; }
 @media (max-width: 640px) { .person, .kv { grid-template-columns: minmax(0, 1fr); } .person .portrait, .person .portrait-photo { max-width: 160px; } }
+
+/* station board (station.html): split-flap departures and arrivals */
+.stn-ctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; font-size: 13px; }
+.stn-ctl select { font: 13px Tahoma, Verdana, sans-serif; }
+.stn-tabs button, .stn-fs { font: bold 12px Tahoma, Verdana, sans-serif; padding: 3px 10px; border: 1px solid #7a5b00; background: linear-gradient(#fff3c4, #e8c35a); cursor: pointer; }
+.stn-tabs button[aria-pressed="true"] { background: linear-gradient(#2f6d2a, #1d4a1a); color: #fff; border-color: #123; }
+.stn-board { background: #0b0b0b; border: 6px ridge #3a3a3a; box-shadow: inset 0 0 18px #000; padding: 10px 12px 8px; color: var(--led); font: bold 14px/1 var(--mono); overflow-x: auto; }
+.stn-head { display: flex; justify-content: space-between; gap: 12px; color: #7cff6b; font-size: 1.15em; letter-spacing: 2px; margin-bottom: 8px; white-space: nowrap; }
+.stn-clock { color: var(--led); }
+.stn-cols, .flip .fr { display: flex; gap: .9em; white-space: nowrap; }
+.stn-cols { color: #8f8f8f; padding: 0 0 5px; border-bottom: 1px solid #333; margin-bottom: 4px; }
+.stn-cols span { flex: none; overflow: visible; }
+.stn-cols i { font-style: normal; font-size: .62em; text-transform: uppercase; letter-spacing: 1px; }
+.flip .fr { padding: 3px 0; }
+.flip .fc { display: inline-flex; gap: 1px; flex: none; }
+.flip .ch { display: inline-block; width: 1.05em; height: 1.35em; line-height: 1.35em; text-align: center; background: linear-gradient(#1d1d1d 49%, #000 50%, #161616 51%); border-radius: 2px; color: #ffb000; text-shadow: 0 0 3px rgba(255,176,0,.5); }
+.flip .c0 .ch, .flip .c1 .ch { color: #f2f2f2; text-shadow: none; }
+.flip .fr.warn .c4 .ch { color: #ffdf3a; }
+.flip .fr.no .c4 .ch { color: #ff5a3c; }
+.flip .fr.ok .c4 .ch { color: #6dff5e; }
+.flip .ch.fl { animation: stnflip .32s ease-in both; transform-origin: 50% 50%; }
+@keyframes stnflip { 0% { transform: rotateX(90deg); color: transparent; } 60% { transform: rotateX(-20deg); } 100% { transform: rotateX(0); } }
+.stn-foot { color: #a37400; font-size: .72em; padding-top: 8px; border-top: 1px solid #333; margin-top: 4px; white-space: normal; line-height: 1.4; }
+.stn-board.fs { position: fixed; inset: 0; z-index: 9999; border: 0; font-size: 1.85vw; display: flex; flex-direction: column; justify-content: center; padding: 3vw; overflow: hidden; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .flip .ch.fl { animation: none; } }
+@media (max-width: 640px) { .stn-board { font-size: 11px; } }

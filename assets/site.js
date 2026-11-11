@@ -1,9 +1,9 @@
 /* railways.iradgov.org: site script. Header, footer, language and the data-driven parts (timetable, live running, freight). */
 (function () {
   "use strict";
-  var SITE = {"store": "tj_lang", "nav": [["home", "/"], ["timetable", "/timetable.html"], ["passengers", "/passengers.html"], ["freight", "/freight.html"], ["network", "/network.html"], ["about", "/about.html"]], "navAlias": {"lost": "passengers", "leadership": "about", "contacts": "about", "news": "about", "documents": "about", "vacancies": "about", "faq": "about"}, "ent": [["/leadership.html", "kit_nav_leadership"], ["/news.html", "kit_nav_news"], ["/documents.html", "kit_nav_documents"], ["/vacancies.html", "kit_nav_vacancies"], ["/faq.html", "kit_nav_faq"], ["/contacts.html", "kit_nav_contacts"]], "links": [["gov", "https://iradgov.org/"], ["eirad", "https://e-irad.org/"], ["bank", "https://bank.iradgov.org/"], ["arch", "https://archives.iradgov.org/"], ["post", "https://post.iradgov.org/"], ["elections", "https://elections.iradgov.org/"], ["court", "https://court.iradgov.org/"], ["stats", "https://stats.iradgov.org/"], ["mejlis", "https://mejlis.iradgov.org/"], ["gidromet", "https://gidromet.iradgov.org/"], ["jandarm", "https://jandarm.iradgov.org/"], ["customs", "https://customs.iradgov.org/"], ["avia", "https://avia.iradgov.org/"], ["talas", "https://talas.iradgov.org/"], ["nurzhan", "https://nurzhan.iradgov.org/"], ["iyikjanyl", "https://iyikjanyl.iradgov.org/"], ["heritage", "https://heritage.iradgov.org/"]], "mastBtn": "/timetable.html"};
+  var SITE = {"store": "tj_lang", "nav": [["home", "/"], ["timetable", "/timetable.html"], ["passengers", "/passengers.html"], ["freight", "/freight.html"], ["network", "/network.html"], ["about", "/about.html"]], "navAlias": {"station": "timetable", "lost": "passengers", "leadership": "about", "contacts": "about", "news": "about", "documents": "about", "vacancies": "about", "faq": "about"}, "ent": [["/leadership.html", "kit_nav_leadership"], ["/news.html", "kit_nav_news"], ["/documents.html", "kit_nav_documents"], ["/vacancies.html", "kit_nav_vacancies"], ["/faq.html", "kit_nav_faq"], ["/contacts.html", "kit_nav_contacts"]], "links": [["gov", "https://iradgov.org/"], ["eirad", "https://e-irad.org/"], ["bank", "https://bank.iradgov.org/"], ["arch", "https://archives.iradgov.org/"], ["post", "https://post.iradgov.org/"], ["elections", "https://elections.iradgov.org/"], ["court", "https://court.iradgov.org/"], ["stats", "https://stats.iradgov.org/"], ["mejlis", "https://mejlis.iradgov.org/"], ["gidromet", "https://gidromet.iradgov.org/"], ["jandarm", "https://jandarm.iradgov.org/"], ["customs", "https://customs.iradgov.org/"], ["avia", "https://avia.iradgov.org/"], ["talas", "https://talas.iradgov.org/"], ["nurzhan", "https://nurzhan.iradgov.org/"], ["iyikjanyl", "https://iyikjanyl.iradgov.org/"], ["heritage", "https://heritage.iradgov.org/"]], "mastBtn": "/timetable.html"};
   var EXTRA = function () {
-    var ids = ["board", "search", "ttLong", "ttSub", "fares", "yard", "track", "wxLine"];
+    var ids = ["board", "station", "search", "ttLong", "ttSub", "fares", "yard", "track", "wxLine"];
     if (!ids.some(function (i) { return document.getElementById(i); })) return;
     var wxP = todayData().catch(function () { return null; });
     getJSON("/data/timetable.json").then(function (T) {
@@ -102,6 +102,86 @@
         return { cls: dl.min > 5 ? "warn" : "ok", txt: t("stRun", { s: sn(next.id), t: hm(next.arr) }) + (dl.min ? " · " + t("stLate", { n: next.late }) : "") };
       }
       function irMin() { var d = iradNow(); return d.getHours() * 60 + d.getMinutes(); }
+      /* station mode: a split-flap board of one station's departures or arrivals, live from the timetable and today's delays */
+      function flipRows(el, rows, widths) {
+        var prev = el._prev || [];
+        var fit = function (c, w) { var x = String(c == null ? "" : c).toUpperCase(); if (x.length > w) x = x.slice(0, w); while (x.length < w) x += " "; return x; };
+        var html = rows.map(function (r, i) {
+          return '<div class="fr' + (r.cls ? " " + r.cls : "") + '">' + r.cells.map(function (c, j) {
+            var txt = fit(c, widths[j]), old = (prev[i] && prev[i][j]) || "", out = "";
+            for (var k = 0; k < txt.length; k++) {
+              var ch = txt.charAt(k), flip = old.charAt(k) !== ch;
+              out += '<span class="ch' + (flip ? " fl" : "") + '"' + (flip ? ' style="animation-delay:' + (k * 22 + j * 40 + Math.floor(Math.random() * 60)) + 'ms"' : "") + ">" + (ch === " " ? "&nbsp;" : esc(ch)) + "</span>";
+            }
+            return '<span class="fc c' + j + '">' + out + "</span>";
+          }).join("") + "</div>";
+        }).join("");
+        el._prev = rows.map(function (r) { return r.cells.map(function (c, j) { return fit(c, widths[j]); }); });
+        return html;
+      }
+      function stationBoard(el, W, today) {
+        var stops = T.stations.filter(function (s) { return s.line !== "tech" && T.trains.some(function (tr) { return tr.stops.some(function (x) { return x[0] === s.id; }); }); });
+        if (!el._ready) {
+          var q = (location.search.match(/[?&]s=([\w-]+)/) || [])[1];
+          el._st = stops.some(function (s) { return s.id === q; }) ? q : "nurzhan";
+          el._mode = /[?&]m=arr/.test(location.search) ? "arr" : "dep";
+          el.innerHTML = '<div class="stn-ctl"><label>' + esc(t("stnStation")) + ' <select id="stnSel">' + stops.map(function (s) { return '<option value="' + s.id + '"' + (s.id === el._st ? " selected" : "") + ">" + esc(tri(s.name)) + "</option>"; }).join("") + "</select></label> " +
+            '<span class="stn-tabs"><button type="button" data-m="dep">' + esc(t("stnDep")) + '</button><button type="button" data-m="arr">' + esc(t("stnArr")) + "</button></span> " +
+            '<button type="button" class="stn-fs">' + esc(t("stnFull")) + "</button></div>" +
+            '<div class="stn-board"><div class="stn-head"><span class="stn-name"></span><span class="stn-clock"></span></div><div class="stn-cols"></div><div class="flip"></div><div class="stn-foot"></div></div>';
+          var go = function () {
+            try { history.replaceState(null, "", "?s=" + el._st + (el._mode === "arr" ? "&m=arr" : "")); } catch (e) {}
+            $(".flip", el)._prev = null; stationBoard(el, el._W, iradToday());
+          };
+          $("#stnSel", el).addEventListener("change", function () { el._st = this.value; go(); });
+          $$(".stn-tabs button", el).forEach(function (b) { b.addEventListener("click", function () { el._mode = b.getAttribute("data-m"); go(); }); });
+          var bd = $(".stn-board", el);
+          $(".stn-fs", el).addEventListener("click", function () {
+            if (document.fullscreenElement) { document.exitFullscreen(); return; }
+            bd.classList.add("fs");
+            if (bd.requestFullscreen) { var p = bd.requestFullscreen(); if (p && p.catch) p.catch(function () {}); }
+          });
+          document.addEventListener("fullscreenchange", function () { if (!document.fullscreenElement) bd.classList.remove("fs"); });
+          bd.addEventListener("click", function () { if (bd.classList.contains("fs") && !document.fullscreenElement) bd.classList.remove("fs"); });
+          var tick = function () { var d = iradNow(), c = $(".stn-clock", el); if (c) c.textContent = pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds()); };
+          tick(); setInterval(tick, 1000);
+          setInterval(function () { stationBoard(el, el._W, iradToday()); }, 30000);
+          el._ready = true;
+        }
+        el._W = W;
+        var arr = el._mode === "arr", now = irMin(), rows = [];
+        $$(".stn-tabs button", el).forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-m") === el._mode ? "true" : "false"); });
+        [[today, 0], [addDays(today, 1), 1440]].forEach(function (dd) {
+          trainsOn(dd[0]).forEach(function (tr) {
+            var i = -1; tr.stops.forEach(function (x, k) { if (x[0] === el._st) i = k; });
+            if (i < 0) return;
+            var tm = arr ? tr.stops[i][1] : tr.stops[i][2];
+            if (!tm) return;
+            var dl = delay(tr, dd[0], W), ex = expected(tr, dl)[i], due = (arr ? ex.arr : ex.dep) + dd[1], sched = m(tm) + dd[1];
+            if (due < now - 20 || (dl.cancelled && sched < now - 20)) return;
+            var rem, cls = "";
+            if (dl.cancelled && W) { rem = t("stnCanc"); cls = "no"; }
+            else if (dd[1]) rem = t("stnTmw");
+            else if (due <= now) rem = t(arr ? "stnIn" : "stnGone");
+            else if (W && dl.min && ex.late && dl.known) { rem = t("stnExp", { t: hm(due), n: ex.late }); cls = "warn"; }
+            else if (!arr && i === 0 && due - now <= 20) { rem = t("stnBoard"); cls = "ok"; }
+            else rem = t("stnOk");
+            var plat = (el._st === "nurzhan" || el._st === "talas") && tr.kind !== "long" ? String(2 + Math.floor(h01("pl|" + tr.no) * 2)) : "1";
+            rows.push({ k: sched, cls: cls, cells: [tm, tr.no, sn(arr ? tr.from : tr.to), plat, rem] });
+          });
+        });
+        rows.sort(function (a, b) { return a.k - b.k; });
+        rows = rows.slice(0, 10);
+        while (rows.length < 10) rows.push({ cells: ["", "", "", "", ""] });
+        $(".stn-name", el).textContent = tri(S[el._st].name).toUpperCase() + " · " + t(arr ? "stnArr" : "stnDep").toUpperCase();
+        var WD = [5, 4, 12, 1, 16];
+        $(".stn-cols", el).innerHTML = ["stnTime", "stnTrain", arr ? "stnFrom" : "stnTo", "stnPl", "stnRem"].map(function (k, j) {
+          return '<span style="width:calc(' + WD[j] + ' * 1.05em + ' + (WD[j] - 1) + 'px)"><i>' + esc(t(k)) + "</i></span>";
+        }).join("");
+        var fl = $(".flip", el); fl.innerHTML = flipRows(fl, rows, WD);
+        var ri = railInc(W, today);
+        $(".stn-foot", el).textContent = ri ? "⚠ " + tri(ri.lines && ri.lines.rail || ri.notice) : (W ? t("stnFoot") : t("noLive"));
+      }
 
       wxP.then(function (W) {
         var today = iradToday(), el;
@@ -129,6 +209,7 @@
                 (st.txt ? '<span class="st ' + st.cls + '">' + esc(st.txt) + "</span>" + (dl.why && dl.min ? '<br><span class="small muted">' + esc(t(dl.why)) + "</span>" : "") : "") + "</td></tr>";
             }).join("") + "</tbody></table></div>" + (W ? "" : '<p class="small muted">' + esc(t("noLive")) + "</p>");
         }
+        if ((el = $("#station"))) stationBoard(el, W, today);
         /* route search */
         if ((el = $("#search"))) {
           var pass = T.stations.filter(function (s) { return s.line !== "tech"; });
